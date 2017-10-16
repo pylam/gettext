@@ -1,5 +1,5 @@
 dnl Configuration for the gettext-tools directory of GNU gettext
-dnl Copyright (C) 1995-2011, 2015-2017 Free Software Foundation, Inc.
+dnl Copyright (C) 1995-2011, 2015-2016 Free Software Foundation, Inc.
 dnl
 dnl This program is free software: you can redistribute it and/or modify
 dnl it under the terms of the GNU General Public License as published by
@@ -34,6 +34,14 @@ AC_PROG_INSTALL
 AC_PROG_YACC
 
 gt_JAVA_CHOICE
+
+gt_GCJ
+if test -n "$HAVE_GCJ" && test "$JAVA_CHOICE" = yes; then
+  BUILDJAVAEXE=yes
+else
+  BUILDJAVAEXE=no
+fi
+AC_SUBST([BUILDJAVAEXE])
 
 gt_JAVAEXEC
 gt_JAVACOMP([1.3])
@@ -161,6 +169,9 @@ AC_CHECK_TYPES([ptrdiff_t])
 gt_TYPE_SSIZE_T
 AC_TYPE_PID_T
 gl_GLIBC21
+if test $GLIBC21 = yes; then
+  AC_CHECK_MEMBERS([struct __locale_struct.__names], , , [#include <xlocale.h>])
+fi
 
 dnl Checks for library functions.
 AC_CHECK_FUNCS([select])

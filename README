@@ -15,11 +15,11 @@ package to internationalize the messages given by shell scripts.
 
 The homepage of this package is at
 
-           https://www.gnu.org/software/gettext/
+           http://www.gnu.org/software/gettext/
 
 The primary FTP site for its distribution is
 
-           https://ftp.gnu.org/pub/gnu/gettext/
+           ftp://ftp.gnu.org/pub/gnu/gettext/
 
 
 Send comments and bug reports to

@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright (C) 2003-2017 Free Software Foundation, Inc.
+# Copyright (C) 2003-2016 Free Software Foundation, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
 #
 # This script requires:
 #   - Autoconf
-#   - Automake >= 1.13
+#   - Automake
 #   - Wget
 #   - Git
 #   - XZ Utils
@@ -101,7 +101,7 @@ if ! $skip_gnulib; then
     if $use_git && test -d "$GNULIB_SRCDIR"/.git && \
           git_modules_config submodule.gnulib.url >/dev/null; then
       echo "$0: getting gnulib files..."
-      if git submodule -h | grep -- --reference > /dev/null; then
+      if git submodule -h|grep -- --reference > /dev/null; then
         # Prefer the one-liner available in git 1.6.4 or newer.
         git submodule update --init --reference "$GNULIB_SRCDIR" \
           "$gnulib_path" || exit $?
@@ -309,6 +309,7 @@ if ! $skip_gnulib; then
       ansi-c++-opt
       csharpcomp-script
       csharpexec-script
+      gcj
       java
       javacomp-script
       javaexec-script
@@ -322,8 +323,7 @@ if ! $skip_gnulib; then
       uniwidth/width-tests
     '
     $GNULIB_TOOL --dir=gettext-tools --lib=libgettextlib --source-base=gnulib-lib --m4-base=gnulib-m4 --tests-base=gnulib-tests --makefile-name=Makefile.gnulib --libtool --with-tests --local-dir=gnulib-local --local-symlink \
-      --import --avoid=hash-tests --avoid=fdutimensat-tests --avoid=futimens-tests --avoid=utime-tests --avoid=utimens-tests --avoid=utimensat-tests \
-      `for m in $GNULIB_MODULES_TOOLS_LIBUNISTRING_TESTS; do echo --avoid=$m; done` $GNULIB_MODULES_TOOLS_FOR_SRC $GNULIB_MODULES_TOOLS_FOR_SRC_COMMON_DEPENDENCIES $GNULIB_MODULES_TOOLS_OTHER || exit $?
+      --import --avoid=hash-tests `for m in $GNULIB_MODULES_TOOLS_LIBUNISTRING_TESTS; do echo --avoid=$m; done` $GNULIB_MODULES_TOOLS_FOR_SRC $GNULIB_MODULES_TOOLS_FOR_SRC_COMMON_DEPENDENCIES $GNULIB_MODULES_TOOLS_OTHER || exit $?
     # In gettext-tools/libgrep:
     GNULIB_MODULES_TOOLS_FOR_LIBGREP='
       mbrlen
@@ -432,9 +432,6 @@ if ! test -f gettext-tools/misc/archive.dir.tar; then
   test $retval -eq 0 || exit $retval
 fi
 
-# Make sure we get new versions of files brought in by automake.
-(cd build-aux && rm -f ar-lib compile depcomp install-sh mdate-sh missing test-driver ylwrap)
-
 # Generate configure script in each subdirectories.
 dir0=`pwd`
 
@@ -445,7 +442,6 @@ aclocal -I ../../m4 -I ../m4 -I gnulib-m4 \
   && autoheader \
   && touch ChangeLog config.h.in \
   && automake --add-missing --copy \
-  && rm -rf autom4te.cache \
   || exit $?
 cd "$dir0"
 
@@ -456,7 +452,6 @@ aclocal -I m4 -I ../m4 -I gnulib-m4 \
   && autoheader \
   && touch ChangeLog intl/ChangeLog config.h.in \
   && automake --add-missing --copy \
-  && rm -rf autom4te.cache \
   || exit $?
 cd "$dir0"
 
@@ -466,7 +461,6 @@ aclocal -I ../../gettext-runtime/m4 -I ../../m4 \
   && autoconf \
   && touch ChangeLog \
   && automake --add-missing --copy \
-  && rm -rf autom4te.cache \
   || exit $?
 cd "$dir0"
 
@@ -499,17 +493,11 @@ cd gettext-tools
 aclocal -I m4 -I ../gettext-runtime/m4 -I ../m4 -I gnulib-m4 -I libgrep/gnulib-m4 -I libgettextpo/gnulib-m4 \
   && autoconf \
   && autoheader && touch ChangeLog config.h.in \
-  && { test -d intl || mkdir intl; } \
+  && test -d intl || mkdir intl \
   && automake --add-missing --copy \
-  && rm -rf autom4te.cache \
   || exit $?
 cd "$dir0"
 
-aclocal -I m4 \
-  && autoconf \
-  && touch ChangeLog \
-  && automake --add-missing --copy \
-  && rm -rf autom4te.cache gettext-runtime/autom4te.cache gettext-tools/autom4te.cache \
-  || exit $?
+aclocal -I m4 && autoconf && touch ChangeLog && automake || exit $?
 
 echo "$0: done.  Now you can run './configure'."

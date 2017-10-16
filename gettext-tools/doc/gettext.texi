@@ -79,7 +79,7 @@ This file provides documentation for GNU @code{gettext} utilities.
 It also serves as a reference for the free Translation Project.
 
 @copying
-Copyright (C) 1995-1998, 2001-2017 Free Software Foundation, Inc.
+Copyright (C) 1995-1998, 2001-2016 Free Software Foundation, Inc.
 
 This manual is free documentation.  It is dually licensed under the
 GNU FDL and the GNU GPL.  This means that you can redistribute this
@@ -6278,11 +6278,10 @@ Faroese @c       0.05 million speakers
 @item Romanic family
 Spanish, @c    328.5 million speakers
 Portuguese, @c 178.0 million speakers - 163 million Brazilian Portuguese
-Italian @c      61.7 million speakers
+Italian, @c     61.7 million speakers
+Bulgarian @c     9.1 million speakers
 @item Latin/Greek family
 Greek @c        13.1 million speakers
-@item Slavic family
-Bulgarian @c     9.1 million speakers
 @item Finno-Ugric family
 Finnish, @c      5.0 million speakers
 Estonian @c      1.0 million speakers
@@ -8022,8 +8021,8 @@ the simplest is to concatenate the files @file{codeset.m4}, @file{fcntl-o.m4},
 @file{visibility.m4}, @file{wchar_t.m4}, @file{wint_t.m4}, @file{xsize.m4}
 from GNU @code{gettext}'s
 @file{m4/} directory into a single file.  If you have suppressed the
-@file{intl/} directory, only @file{gettext.m4}, @file{intlmacosx.m4},
-@file{iconv.m4}, @file{lib-ld.m4}, @file{lib-link.m4}, @file{lib-prefix.m4},
+@file{intl/} directory, only @file{gettext.m4}, @file{iconv.m4},
+@file{lib-ld.m4}, @file{lib-link.m4}, @file{lib-prefix.m4},
 @file{nls.m4}, @file{po.m4}, @file{progtest.m4} need to be concatenated.
 
 If you are not using GNU @code{automake} 1.8 or newer, you will need to
@@ -8234,7 +8233,7 @@ textdomain (@var{PACKAGE});
 @end example
 
 To make LOCALEDIR known to the program, add the following lines to
-@file{Makefile.in}:
+@file{Makefile.in} if you are using Autoconf version 2.60 or newer:
 
 @example
 datadir = @@datadir@@
@@ -8243,7 +8242,15 @@ localedir = @@localedir@@
 DEFS = -DLOCALEDIR=\"$(localedir)\" @@DEFS@@
 @end example
 
-Note that @code{@@datadir@@} defaults to @samp{$(prefix)/share}, and
+or these lines if your version of Autoconf is older than 2.60:
+
+@example
+datadir = @@datadir@@
+localedir = $(datadir)/locale
+DEFS = -DLOCALEDIR=\"$(localedir)\" @@DEFS@@
+@end example
+
+Note that @code{@@datadir@@} defaults to @samp{$(prefix)/share}, thus
 @code{$(localedir)} defaults to @samp{$(prefix)/share/locale}.
 
 @item
@@ -9161,7 +9168,7 @@ String Formatting}, @uref{http://www.python.org/dev/peps/pep-3101/}.
 
 Lisp format strings are described in the Common Lisp HyperSpec,
 chapter 22.3 @w{Formatted Output},
-@uref{http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/sec_22-3.html}.
+@uref{http://www.lisp.org/HyperSpec/Body/sec_22-3.html}.
 
 @node elisp-format, librep-format, lisp-format, Translators for other Languages
 @subsection Emacs Lisp Format Strings
@@ -10996,9 +11003,7 @@ perl
 
 @item gettext/ngettext functions
 @code{gettext}, @code{dgettext}, @code{dcgettext}, @code{ngettext},
-@code{dngettext}, @code{dcngettext}, @code{pgettext}, @code{dpgettext},
-@code{dcpgettext}, @code{npgettext}, @code{dnpgettext},
-@code{dcnpgettext}
+@code{dngettext}, @code{dcngettext}
 
 @item textdomain
 @code{textdomain} function
@@ -11022,8 +11027,7 @@ http://www.cpan.org/).
 platform dependent: gettext_pp emulates, gettext_xs uses GNU gettext
 
 @item Extractor
-@code{xgettext -k__ -k\$__ -k%__ -k__x -k__n:1,2 -k__nx:1,2 -k__xn:1,2 
--kN__ -kN__n:1,2 -k__p:1c,2 -k__np:1c,2,3 -kN__p:1c,2 -kN__np:1c,2,3}
+@code{xgettext -k__ -k\$__ -k%__ -k__x -k__n:1,2 -k__nx:1,2 -k__xn:1,2 -kN__ -k}
 
 @item Formatting with positions
 Both kinds of format strings support formatting with positions.
@@ -11238,55 +11242,24 @@ following keywords in your Perl sources:
 
 @item @code{gettext}
 
-@item @code{dgettext:2}
+@item @code{dgettext}
 
-The second argument will be extracted.
-
-@item @code{dcgettext:2}
-
-The second argument will be extracted.
+@item @code{dcgettext}
 
 @item @code{ngettext:1,2}
 
 The first (singular) and the second (plural) argument will be
 extracted.
 
-@item @code{dngettext:2,3}
+@item @code{dngettext:1,2}
 
-The second (singular) and the third (plural) argument will be
+The first (singular) and the second (plural) argument will be
 extracted.
 
-@item @code{dcngettext:2,3}
+@item @code{dcngettext:1,2}
 
-The second (singular) and the third (plural) argument will be
+The first (singular) and the second (plural) argument will be
 extracted.
-
-@item @code{pgettext:1c,2}
-
-The first (message context) and the second argument will be extracted.
-
-@item @code{dpgettext:2c,3}
-
-The second (message context) and the third argument will be extracted.
-
-@item @code{dcpgettext:2c,3}
-
-The second (message context) and the third argument will be extracted.
-
-@item @code{npgettext:1c,2,3}
-
-The first (message context), second (singular), and third (plural)
-argument will be extracted.
-
-@item @code{dnpgettext:2c,3,4}
-
-The second (message context), third (singular), and fourth (plural)
-argument will be extracted.
-
-@item @code{dcnpgettext:2c,3,4}
-
-The second (message context), third (singular), and fourth (plural)
-argument will be extracted.
 
 @item @code{gettext_noop}
 
@@ -12246,15 +12219,12 @@ glib2
 @node AppData, Preparing ITS Rules, GSettings, List of Data Formats
 @subsection AppData - freedesktop.org application description
 
-This file format is specified in
-@url{https://www.freedesktop.org/software/appstream/docs/}.
-
 @table @asis
 @item RPMs
 appdata-tools, appstream, libappstream-glib, libappstream-glib-builder
 
 @item File extension
-@code{appdata.xml}, @code{metainfo.xml}
+@code{appdata.xml}
 
 @item Extractor
 @code{xgettext}, @code{intltool-extract}, @code{itstool}

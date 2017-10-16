@@ -45,7 +45,6 @@
 #include "xsize.h"
 #include "xalloc.h"
 #include "xmalloca.h"
-#include "msgl-header.h"
 #include "binary-io.h"
 #include "fwriteerror.h"
 #include "gettext.h"
@@ -787,10 +786,6 @@ msgdomain_write_mo (message_list_ty *mlp,
   /* If no entry for this domain don't even create the file.  */
   if (mlp->nitems != 0)
     {
-      /* Support for "reproducible builds": Delete information that may vary
-         between builds in the same conditions.  */
-      message_list_delete_header_field (mlp, "POT-Creation-Date:");
-
       if (strcmp (domain_name, "-") == 0)
         {
           output_file = stdout;

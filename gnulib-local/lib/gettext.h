@@ -18,9 +18,8 @@
 #ifndef _LIBGETTEXT_H
 #define _LIBGETTEXT_H 1
 
-/* NLS can be disabled through the configure --disable-nls option
-   or through "#define ENABLE NLS 0" before including this file.  */
-#if defined ENABLE_NLS && ENABLE_NLS
+/* NLS can be disabled through the configure --disable-nls option.  */
+#if ENABLE_NLS
 
 /* Get declarations of GNU message catalog functions.  */
 # include <libintl.h>
@@ -185,8 +184,7 @@ npgettext_aux (const char *domain,
 #include <string.h>
 
 #if (((__GNUC__ >= 3 || __GNUG__ >= 2) && !defined __STRICT_ANSI__) \
-     /* || __STDC_VERSION__ == 199901L
-        || (__STDC_VERSION__ >= 201112L && !defined __STDC_NO_VLA__) */ )
+     /* || __STDC_VERSION__ >= 199901L */ )
 # define _LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS 1
 #else
 # define _LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS 0

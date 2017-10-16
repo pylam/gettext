@@ -5,7 +5,7 @@
     struct patternlist
     {
       struct patternlist *next;
-      CHAR str[FLEXIBLE_ARRAY_MEMBER];
+      CHAR str[1];
     } *list = NULL;
     struct patternlist **lastp = &list;
     size_t pattern_len = STRLEN (pattern);
@@ -27,7 +27,7 @@
     {
       struct patternlist *next;
 +     int malloced;
-      CHAR str[FLEXIBLE_ARRAY_MEMBER];
+      CHAR str[1];
     } *list = NULL;
     struct patternlist **lastp = &list;
     size_t pattern_len = STRLEN (pattern);
@@ -69,7 +69,7 @@
 ***************
 *** 1075,1085 ****
               plensize = plen * sizeof (CHAR);                                  \
-              newpsize = FLEXSIZEOF (struct patternlist, str, plensize);        \
+              newpsize = offsetof (struct patternlist, str) + plensize;         \
               if ((size_t) -1 / sizeof (CHAR) < plen                            \
 !                 || newpsize < offsetof (struct patternlist, str)              \
 !                 || ALLOCA_LIMIT <= newpsize)                                  \
@@ -81,7 +81,7 @@
               lastp = &newp->next
 --- 1081,1101 ----
               plensize = plen * sizeof (CHAR);                                  \
-              newpsize = FLEXSIZEOF (struct patternlist, str, plensize);        \
+              newpsize = offsetof (struct patternlist, str) + plensize;         \
               if ((size_t) -1 / sizeof (CHAR) < plen                            \
 !                 || newpsize < offsetof (struct patternlist, str))             \
 !               goto failed;                                                    \
@@ -102,19 +102,20 @@
               *lastp = newp;                                                    \
               lastp = &newp->next
 ***************
-*** 1103,1113 ****
+*** 1103,1114 ****
       {
       case L_('*'):
         if (FCT (p, string, string_end, no_leading_period, flags) == 0)
 !         return 0;
-        FALLTHROUGH;
+        /* FALLTHROUGH */
+  
       case L_('+'):
         do
           {
             for (rs = string; rs <= string_end; ++rs)
               /* First match the prefix with the current pattern with the
                  current pattern.  */
---- 1119,1134 ----
+--- 1119,1135 ----
       {
       case L_('*'):
         if (FCT (p, string, string_end, no_leading_period, flags) == 0)
@@ -122,7 +123,8 @@
 !           retval = 0;
 !           goto done;
 !         }
-        FALLTHROUGH;
+        /* FALLTHROUGH */
+  
       case L_('+'):
         do
           {
@@ -132,7 +134,7 @@
               /* First match the prefix with the current pattern with the
                  current pattern.  */
 ***************
-*** 1130,1159 ****
+*** 1130,1160 ****
                                   : rs[-1] == '/' && NO_LEADING_PERIOD (flags),
                                   flags & FNM_FILE_NAME
                                   ? flags : flags & ~FNM_PERIOD) == 0)))
@@ -147,7 +149,8 @@
       case L_('?'):
         if (FCT (p, string, string_end, no_leading_period, flags) == 0)
 !         return 0;
-        FALLTHROUGH;
+        /* FALLTHROUGH */
+  
       case L_('@'):
         do
 !         /* I cannot believe it but 'strcat' is actually acceptable
@@ -163,7 +166,7 @@
   
         /* None of the patterns lead to a match.  */
         return FNM_NOMATCH;
---- 1151,1203 ----
+--- 1151,1204 ----
                                   : rs[-1] == '/' && NO_LEADING_PERIOD (flags),
                                   flags & FNM_FILE_NAME
                                   ? flags : flags & ~FNM_PERIOD) == 0)))
@@ -189,7 +192,8 @@
 !           retval = 0;
 !           goto done;
 !         }
-        FALLTHROUGH;
+        /* FALLTHROUGH */
+  
       case L_('@'):
         do
 !         {

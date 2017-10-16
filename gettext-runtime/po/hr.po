@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gettext-runtime-0.19.4.73\n"
 "Report-Msgid-Bugs-To: bug-gnu-gettext@gnu.org\n"
-"POT-Creation-Date: 2015-06-23 15:18+0900\n"
+"POT-Creation-Date: 2016-06-11 22:08+0900\n"
 "PO-Revision-Date: 2016-03-30 12:23-0700\n"
 "Last-Translator: Božidar Putanec <bozidarp@yahoo.com>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
@@ -15,7 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: ../../Downloads/gettext-0.19.7-rc1/gettext-runtime/src\n"
@@ -107,7 +108,7 @@ msgid "memory exhausted"
 msgstr "nema dovoljno memorije"
 
 # http://ihjj.hr/ ppreporučuje „licencija“ umjesto „licenca“; jamstva umjesto jamstava
-#: src/envsubst.c:112 src/gettext.c:134 src/ngettext.c:124
+#: src/envsubst.c:112 src/gettext.c:134 src/ngettext.c:123
 #, c-format, no-wrap
 msgid ""
 "Copyright (C) %s Free Software Foundation, Inc.\n"
@@ -120,7 +121,7 @@ msgstr ""
 "Ovo je slobodan softver: slobodno ga mijenjajte i dijelite.\n"
 "NEMA JAMSTVA, do granica dopuštenih zakonom.\n"
 
-#: src/envsubst.c:118 src/gettext.c:140 src/ngettext.c:130
+#: src/envsubst.c:118 src/gettext.c:140 src/ngettext.c:129
 #, c-format
 msgid "Written by %s.\n"
 msgstr "Napisao %s.\n"
@@ -130,17 +131,17 @@ msgstr "Napisao %s.\n"
 msgid "Bruno Haible"
 msgstr "Bruno Haible"
 
-#: src/envsubst.c:127 src/gettext.c:158 src/ngettext.c:142
+#: src/envsubst.c:127 src/gettext.c:158 src/ngettext.c:141
 #, c-format
 msgid "too many arguments"
 msgstr "previše argumenata"
 
-#: src/envsubst.c:138 src/gettext.c:168 src/ngettext.c:154
+#: src/envsubst.c:138 src/gettext.c:168 src/ngettext.c:153
 #, c-format
 msgid "missing arguments"
 msgstr "nedostaju argumenti"
 
-#: src/envsubst.c:171 src/gettext.c:239 src/ngettext.c:208
+#: src/envsubst.c:171 src/gettext.c:239 src/ngettext.c:207
 #, c-format
 msgid "Try '%s --help' for more information.\n"
 msgstr "„%s --help“ pomoć za uporabu i dodatne obavijesti.\n"
@@ -218,7 +219,7 @@ msgstr ""
 #. for this package.  Please add _another line_ saying
 #. "Report translation bugs to <...>\n" with the address for translation
 #. bugs (typically your translation team's web or email address).
-#: src/envsubst.c:219 src/gettext.c:280 src/ngettext.c:246
+#: src/envsubst.c:219 src/gettext.c:280 src/ngettext.c:245
 msgid "Report bugs to <bug-gnu-gettext@gnu.org>.\n"
 msgstr ""
 "Greškice (bugs) na engleskom javite na <bug-gnu-gettext@gnu.org>.\n"
@@ -234,7 +235,7 @@ msgid "standard input"
 msgstr "standardni ulaz"
 
 #. This is a proper name. See the gettext manual, section Names.
-#: src/gettext.c:140 src/ngettext.c:130
+#: src/gettext.c:140 src/ngettext.c:129
 msgid "Ulrich Drepper"
 msgstr "Ulrich Drepper"
 
@@ -302,13 +303,13 @@ msgstr ""
 "\n"
 "Uobičajeni direktorij za pretragu: %s\n"
 
-#: src/ngettext.c:213
+#: src/ngettext.c:212
 #, c-format, no-wrap
 msgid "Usage: %s [OPTION] [TEXTDOMAIN] MSGID MSGID-PLURAL COUNT\n"
 msgstr "Uporaba: %s [OPCIJA] [TEXTDOMENA] MSGID MSGID-PLURAL BROJ\n"
 
 # http://ihjj.hr: „materinji“ > „materinski“
-#: src/ngettext.c:218
+#: src/ngettext.c:217
 #, c-format, no-wrap
 msgid ""
 "Display native language translation of a textual message whose grammatical\n"
@@ -325,7 +326,7 @@ msgstr ""
 # nema, onda ga ne može „retrieve“; zato
 # promjena  „retrieve“ >  „traži“
 # jd./mn. za poruke slijedi gettext Manual.
-#: src/ngettext.c:223
+#: src/ngettext.c:222
 #, c-format, no-wrap
 msgid ""
 "  -d, --domain=TEXTDOMAIN   retrieve translated message from TEXTDOMAIN\n"
@@ -346,7 +347,7 @@ msgstr ""
 "  MSGID MSGID-PLURAL        prijevod za MSGID (jd.) ili za MSGID-PLURAL (mn.)\n"
 "  BROJ                      izbor jd. ili oblika mn. zavisi o veličini BROJ\n"
 
-#: src/ngettext.c:234
+#: src/ngettext.c:233
 #, c-format, no-wrap
 msgid ""
 "If the TEXTDOMAIN parameter is not given, the domain is determined from the\n"

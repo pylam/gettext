@@ -34,7 +34,6 @@
 #include "xerror.h"
 #include "message.h"
 #include "msgl-iconv.h"
-#include "msgl-header.h"
 #include "po-charset.h"
 #include "xalloc.h"
 #include "xmalloca.h"
@@ -184,10 +183,6 @@ but the Tcl message catalog format doesn't support plural handling\n")));
 
   /* Convert the messages to Unicode.  */
   iconv_message_list (mlp, canon_encoding, po_charset_utf8, NULL);
-
-  /* Support for "reproducible builds": Delete information that may vary
-     between builds in the same conditions.  */
-  message_list_delete_header_field (mlp, "POT-Creation-Date:");
 
   /* Now create the file.  */
   {

@@ -9,9 +9,10 @@ The following packages should be installed before GNU gettext is installed
     But highly recommended on all other systems.
     Needed for character set conversion of PO files from/to Unicode.
   + Homepage:
-    https://www.gnu.org/software/libiconv/
+    http://www.gnu.org/software/libiconv/
   + Download:
-    https://ftp.gnu.org/gnu/libiconv/
+    http://ftp.gnu.org/gnu/libiconv/
+    ftp://ftp.gnu.org/gnu/libiconv/
   + If it is installed in a nonstandard directory, pass the option
     --with-libiconv-prefix=DIR to 'configure'.
 
@@ -20,9 +21,10 @@ The following packages should be installed before GNU gettext is installed
   + Highly recommended.
     Needed for the --color option of the 'msgcat' program.
   + Homepage:
-    https://www.gnu.org/software/ncurses/
+    http://www.gnu.org/software/ncurses/
   + Download:
-    https://ftp.gnu.org/gnu/ncurses/
+    http://ftp.gnu.org/gnu/ncurses/
+    ftp://ftp.gnu.org/gnu/ncurses/
   + If it is installed in a nonstandard directory, pass the option
     --with-ncurses-prefix=DIR or --with-libtermcap-prefix to 'configure'.
 
@@ -40,25 +42,26 @@ The following packages should be installed before GNU gettext is installed
   + If it is installed in a nonstandard directory, pass the option
     --with-libxml2-prefix=DIR to 'configure'.
 
-* A Java runtime and compiler (e.g. OpenJDK or kaffe).
+* A Java runtime and compiler (e.g. GNU gcj or kaffe).
   + Recommended.
     Needed for building libintl.jar.  Also needed for 'msgfmt' and
     'msgunfmt', so that they can handle Java classes and properties files.
   + Homepage:
-    http://openjdk.java.net/
+    http://gcc.gnu.org/java/
     http://www.kaffe.org/
   + Download:
-    http://openjdk.java.net/install/index.html
-    https://github.com/kaffe/kaffe
+    http://ftp.gnu.org/gnu/gcc/
+    http://www.kaffe.org/ftp/pub/kaffe/v1.1.x-development/
 
 * A C# runtime and compiler (e.g. pnet or mono).
   + Recommended.
     Needed for building GNU.Gettext.dll. Also needed for 'msgfmt' and
     'msgunfmt', so that they can handle C# resources and assemblies.
   + Homepage:
-    http://www.mono-project.com/
+    http://www.southern-storm.com.au/portable_net.html
   + Download:
-    http://www.mono-project.com/download/
+    http://www.southern-storm.com.au/portable_net.html#download
+    http://www.mono-project.com/Downloads
   + If more than one C# is installed, pass the option --enable-csharp=IMPL
     to 'configure', to disambiguate.
 
@@ -67,26 +70,28 @@ The following packages should be installed before GNU gettext is installed
     Needed by the 'autopoint' program, if not configured with --without-git
     or --with-cvs.
   + Homepage:
-    https://git-scm.com/
+    http://git-scm.com/
   + Download:
-    https://www.kernel.org/pub/software/scm/git/
+    http://www.kernel.org/pub/software/scm/git/
 
 * The archiving utility 'tar'.
   + Recommended.
     Needed for the 'autopoint' program.
     Either the platform's native tar, or GNU tar.
   + Homepage:
-    https://www.gnu.org/software/tar/
+    http://www.gnu.org/software/tar/
   + Download:
-    https://ftp.gnu.org/gnu/tar/
+    http://ftp.gnu.org/gnu/tar/
+    ftp://ftp.gnu.org/gnu/tar/
 
 * The GNU compression utility 'gzip'.
   + Recommended.
     Needed for the 'autopoint' program.
   + Homepage:
-    https://www.gnu.org/software/gzip/
+    http://www.gnu.org/software/gzip/
   + Download:
-    https://ftp.gnu.org/gnu/gzip/
+    http://ftp.gnu.org/gnu/gzip/
+    ftp://ftp.gnu.org/gnu/gzip/
 
 * The compression utility 'bzip2'.
   + Recommended.
@@ -110,10 +115,9 @@ The following packages should be installed before GNU gettext is installed
     If not present, a subset of libglib2 (included in this package) will be
     compiled into libgettextlib.
   + Homepage:
-    https://developer.gnome.org/glib/
-    https://github.com/GNOME/glib
+    http://developer.gnome.org/arch/gtk/glib.html
   + Download:
-    https://ftp.gnome.org/pub/GNOME/sources/glib/
+    http://ftp.gnome.org/pub/GNOME/sources/glib/
   + If it is installed in a nonstandard directory, pass the option
     --with-libglib-2.0-prefix=DIR to 'configure'.
 
@@ -123,10 +127,9 @@ The following packages should be installed before GNU gettext is installed
     If not present, a copy of libcroco-0.6.1 (included in this package) will
     be compiled into libgettextlib.
   + Homepage:
-    https://developer.gnome.org/libcroco/
-    https://github.com/GNOME/libcroco
+    http://www.freespiders.org/projects/libcroco/
   + Download:
-    https://ftp.gnome.org/pub/GNOME/sources/libcroco/0.6/
+    http://ftp.gnome.org/pub/GNOME/sources/libcroco/0.6/
   + If it is installed in a nonstandard directory, pass the option
     --with-libcroco-0.6-prefix=DIR to 'configure'.
 
@@ -136,9 +139,10 @@ The following packages should be installed before GNU gettext is installed
     If not present, a subset of libunistring (included in this package) will
     be compiled into libgettextlib.
   + Homepage:
-    https://www.gnu.org/software/libunistring/
+    http://www.gnu.org/software/libunistring/
   + Download:
-    https://ftp.gnu.org/gnu/libunistring/
+    http://ftp.gnu.org/gnu/libunistring/
+    ftp://ftp.gnu.org/gnu/libunistring/
   + If it is installed in a nonstandard directory, pass the option
     --with-libunistring-prefix=DIR to 'configure'.
 
@@ -146,9 +150,10 @@ The following packages should be installed before GNU gettext is installed
   + Optional but deprecated.
     Needed by the 'autopoint' program, if configured with --with-cvs.
   + Homepage:
+    http://ximbiot.com/cvs/wiki/index.php?title=Main_Page
     http://www.nongnu.org/cvs/
   + Download:
-    https://ftp.gnu.org/non-gnu/cvs/
+    http://ftp.gnu.org/non-gnu/cvs/
 
 
 The following packages should be installed when GNU gettext is installed
@@ -164,24 +169,27 @@ dependencies):
 * A C runtime, compiler, linker, etc.
   + Mandatory. Either the platform's native 'cc', or GCC 2.95 or newer.
   + GCC Homepage:
-    https://gcc.gnu.org/
+    http://gcc.gnu.org/
   + Download:
-    https://ftp.gnu.org/gnu/gcc/
+    http://ftp.gnu.org/gnu/gcc/
+    ftp://ftp.gnu.org/gnu/gcc/
 
 * A 'make' utility.
   + Mandatory. Either the platform's native 'make' (for in-tree builds only),
     or GNU Make 3.79.1 or newer.
   + GNU Make Homepage:
-    https://www.gnu.org/software/make/
+    http://www.gnu.org/software/make/
   + Download:
-    https://ftp.gnu.org/gnu/make/
+    http://ftp.gnu.org/gnu/make/
+    ftp://ftp.gnu.org/gnu/make/
 
 * A shell
   + Mandatory. Either the platform's native 'sh', or Bash.
   + Homepage:
-    https://www.gnu.org/software/bash/
+    http://www.gnu.org/software/bash/
   + Download:
-    https://ftp.gnu.org/gnu/bash/
+    http://ftp.gnu.org/gnu/bash/
+    ftp://ftp.gnu.org/gnu/bash/
 
 * Core POSIX utilities, including:
     [ basename cat chgrp chmod chown cp dd echo expand expr
@@ -190,20 +198,23 @@ dependencies):
     true uname
   + Mandatory. Either the platform's native utilities, or GNU coreutils.
   + Homepage:
-    https://www.gnu.org/software/coreutils/
+    http://www.gnu.org/software/coreutils/
   + Download:
-    https://ftp.gnu.org/gnu/coreutils/
+    http://ftp.gnu.org/gnu/coreutils/
+    ftp://ftp.gnu.org/gnu/coreutils/
 
 * The comparison utilities 'cmp' and 'diff'.
   + Mandatory. Either the platform's native utilities, or GNU diffutils.
   + Homepage:
-    https://www.gnu.org/software/diffutils/
+    http://www.gnu.org/software/diffutils/
   + Download:
-    https://ftp.gnu.org/gnu/diffutils/
+    http://ftp.gnu.org/gnu/diffutils/
+    ftp://ftp.gnu.org/gnu/diffutils/
 
 * Grep.
   + Mandatory. Either the platform's native grep, or GNU grep.
   + Homepage:
-    https://www.gnu.org/software/grep/
+    http://www.gnu.org/software/grep/
   + Download:
-    https://ftp.gnu.org/gnu/grep/
+    http://ftp.gnu.org/gnu/grep/
+    ftp://ftp.gnu.org/gnu/grep/

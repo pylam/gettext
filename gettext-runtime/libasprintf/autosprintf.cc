@@ -56,12 +56,10 @@ namespace gnu
     str = (src.str != NULL ? strdup (src.str) : NULL);
   }
 
-  /* Assignment operator.  Necessary because the destructor is nontrivial.  */
-  autosprintf& autosprintf::operator = (autosprintf temporary)
+  /* Copy constructor.  Necessary because the destructor is nontrivial.  */
+  autosprintf& autosprintf::operator = (autosprintf copy)
   {
-    /* Copy-and-swap idiom.
-       See http://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom  */
-    std::swap (temporary.str, this->str);
+    std::swap (copy.str, this->str);
     return *this;
   }
 

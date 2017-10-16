@@ -1,5 +1,5 @@
 /* Implementation of the internal dcigettext function.
-   Copyright (C) 1995-2017 Free Software Foundation, Inc.
+   Copyright (C) 1995-2016 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU Lesser General Public License as published by
@@ -634,7 +634,7 @@ DCIGETTEXT (const char *domainname, const char *msgid1, const char *msgid2,
 	  for (;;)
 	    {
 	      resolved_dirname = (char *) alloca (path_max + dirname_len);
-	      ADD_BLOCK (block_list, resolved_dirname);
+	      ADD_BLOCK (block_list, tmp_dirname);
 
 	      __set_errno (0);
 	      ret = getcwd (resolved_dirname, path_max);
@@ -1111,12 +1111,7 @@ _nl_find_msg (struct loaded_l10nfile *domain_file,
 	      /* Resource problems are fatal.  If we continue onwards we will
 	         only attempt to calloc a new conv_tab and fail later.  */
 	      if (__builtin_expect (nullentry == (char *) -1, 0))
-		{
-# ifndef IN_LIBGLOCALE
-		  free ((char *) encoding);
-# endif
-		  goto unlock_fail;
-		}
+	        return (char *) -1;
 
 	      if (nullentry != NULL)
 		{

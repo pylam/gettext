@@ -1,5 +1,5 @@
 ## Makefile for the gettext-tools/src subdirectory of GNU gettext
-## Copyright (C) 1995-1998, 2000-2011, 2015-2017 Free Software Foundation, Inc.
+## Copyright (C) 1995-1998, 2000-2011, 2015-2016 Free Software Foundation, Inc.
 ##
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -75,6 +75,8 @@ DEFS = \
   -DLOCALEDIR=\"$(localedir)\" -DBISON_LOCALEDIR=\"$(BISON_LOCALEDIR)\" \
   -DLOCALE_ALIAS_PATH=\"$(aliaspath)\" \
   -DUSEJAVA=$(USEJAVA) \
+  -DUSEJEXE=$(USEJEXE) \
+  -DGETTEXTJEXEDIR=\"$(pkglibdir)\" \
   -DGETTEXTJAR=\"$(jardir)/gettext.jar\" \
   -DLIBDIR=\"$(libdir)\" \
   -DGETTEXTDATADIR=\"$(pkgdatadir)\" \
@@ -87,6 +89,8 @@ OTHERPROGDEPENDENCIES = ../gnulib-lib/libgettextlib.la $(WOE32_LDADD)
 
 SED = sed
 YACC = @YACC@ -d
+GCJ = @GCJ@
+GCJFLAGS = @GCJFLAGS@
 JAR = @JAR@
 JAVACOMP = $(SHELL) ../javacomp.sh
 CSHARPCOMP = $(SHELL) ../csharpcomp.sh
@@ -492,13 +496,27 @@ DISTCLEANFILES += user-email
 
 # Special rules for Java compilation.
 
-USEJAVA = $(USEJAVA_@BUILDJAVA@)
+USEJAVA = $(USEJAVA_@BUILDJAVAEXE@)
 USEJAVA_yes = 1
-USEJAVA_no = 0
+USEJAVA_no = $(USEJAVA_no_@BUILDJAVA@)
+USEJAVA_no_yes = 1
+USEJAVA_no_no = 0
 
-all-local: all-java-@BUILDJAVA@
-all-java-yes: gettext.jar
-all-java-no:
+USEJEXE = $(USEJEXE_@BUILDJAVAEXE@)
+USEJEXE_yes = 1
+USEJEXE_no = 0
+
+all-local: all-java-@BUILDJAVAEXE@
+all-java-yes: gnu.gettext.DumpResource$(EXEEXT) gnu.gettext.GetURL$(EXEEXT)
+all-java-no: all-java-no-@BUILDJAVA@
+all-java-no-yes: gettext.jar
+all-java-no-no:
+
+gnu.gettext.DumpResource$(EXEEXT): $(srcdir)/gnu/gettext/DumpResource.java
+	$(GCJ) $(GCJFLAGS) $(srcdir)/gnu/gettext/DumpResource.java --main=gnu.gettext.DumpResource -o $@
+
+gnu.gettext.GetURL$(EXEEXT): $(srcdir)/gnu/gettext/GetURL.java
+	$(GCJ) $(GCJFLAGS) $(srcdir)/gnu/gettext/GetURL.java --main=gnu.gettext.GetURL -o $@
 
 gnu/gettext/DumpResource.class: $(srcdir)/gnu/gettext/DumpResource.java
 	$(JAVACOMP) -d . $(srcdir)/gnu/gettext/DumpResource.java
@@ -511,22 +529,39 @@ gettext.jar: gnu/gettext/DumpResource.class gnu/gettext/GetURL.class
 
 EXTRA_DIST += gnu/gettext/DumpResource.java gnu/gettext/GetURL.java
 
-CLEANFILES += gettext.jar gnu/gettext/*.class
+CLEANFILES += gnu.gettext.DumpResource$(EXEEXT) gnu.gettext.GetURL$(EXEEXT) \
+              gettext.jar gnu/gettext/*.class
 
-install-data-local: install-data-java-@BUILDJAVA@
-install-data-java-yes: all-java-yes
+install-exec-local: install-exec-java-@BUILDJAVAEXE@
+install-exec-java-yes: all-java-yes
+	$(MKDIR_P) $(DESTDIR)$(pkglibdir)
+	$(INSTALL_PROGRAM_ENV) $(INSTALL_PROGRAM) gnu.gettext.DumpResource$(EXEEXT) $(DESTDIR)$(pkglibdir)/gnu.gettext.DumpResource$(EXEEXT)
+	$(INSTALL_PROGRAM_ENV) $(INSTALL_PROGRAM) gnu.gettext.GetURL$(EXEEXT) $(DESTDIR)$(pkglibdir)/gnu.gettext.GetURL$(EXEEXT)
+install-exec-java-no:
+
+install-data-local: install-data-java-@BUILDJAVAEXE@
+install-data-java-yes:
+install-data-java-no: install-data-java-no-@BUILDJAVA@
+install-data-java-no-yes: all-java-no-yes
 	$(INSTALL_DATA) gettext.jar $(DESTDIR)$(jardir)/gettext.jar
-install-data-java-no:
+install-data-java-no-no:
 
-installdirs-local: installdirs-java-@BUILDJAVA@
+installdirs-local: installdirs-java-@BUILDJAVAEXE@
 installdirs-java-yes:
+	$(MKDIR_P) $(DESTDIR)$(pkglibdir)
+installdirs-java-no: installdirs-java-no-@BUILDJAVA@
+installdirs-java-no-yes:
 	$(MKDIR_P) $(DESTDIR)$(jardir)
-installdirs-java-no:
+installdirs-java-no-no:
 
-uninstall-local: uninstall-java-@BUILDJAVA@
+uninstall-local: uninstall-java-@BUILDJAVAEXE@
 uninstall-java-yes:
+	$(RM) $(DESTDIR)$(pkglibdir)/gnu.gettext.DumpResource$(EXEEXT)
+	$(RM) $(DESTDIR)$(pkglibdir)/gnu.gettext.GetURL$(EXEEXT)
+uninstall-java-no: uninstall-java-no-@BUILDJAVA@
+uninstall-java-no-yes:
 	$(RM) $(DESTDIR)$(jardir)/gettext.jar
-uninstall-java-no:
+uninstall-java-no-no:
 
 
 # Special rules for C# auxiliary programs.

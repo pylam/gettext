@@ -35,7 +35,6 @@
 #include "message.h"
 #include "po-charset.h"
 #include "msgl-iconv.h"
-#include "msgl-header.h"
 #include "hash-string.h"
 #include "unistr.h"
 #include "xalloc.h"
@@ -724,10 +723,6 @@ strings, not in the untranslated strings\n")));
                 }
           }
       }
-
-      /* Support for "reproducible builds": Delete information that may vary
-         between builds in the same conditions.  */
-      message_list_delete_header_field (mlp, "POT-Creation-Date:");
 
       if (strcmp (domain_name, "-") == 0)
         {

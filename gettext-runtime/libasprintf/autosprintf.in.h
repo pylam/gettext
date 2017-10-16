@@ -47,8 +47,7 @@ namespace gnu
                 _AUTOSPRINTF_ATTRIBUTE_FORMAT();
     /* Copy constructor.  */
     autosprintf (const autosprintf& src);
-    /* Assignment operator.  */
-    autosprintf& operator = (autosprintf temporary);
+    autosprintf& operator = (autosprintf copy);
     /* Destructor: frees the temporarily allocated string.  */
     ~autosprintf ();
     /* Conversion to string.  */

@@ -46,7 +46,7 @@ TESTS = gettext-1 gettext-2 gettext-3 gettext-4 gettext-5 gettext-6 gettext-7 \
 	msgfilter-sr-latin-1 msgfilter-quote-1 \
 	msgfmt-1 msgfmt-2 msgfmt-3 msgfmt-4 msgfmt-5 msgfmt-6 msgfmt-7 \
 	msgfmt-8 msgfmt-9 msgfmt-10 msgfmt-11 msgfmt-12 msgfmt-13 msgfmt-14 \
-	msgfmt-15 msgfmt-16 msgfmt-17 msgfmt-18 msgfmt-19 \
+	msgfmt-15 msgfmt-16 msgfmt-17 msgfmt-18 \
 	msgfmt-properties-1 \
 	msgfmt-qt-1 msgfmt-qt-2 \
 	msgfmt-desktop-1 msgfmt-desktop-2 \
@@ -95,7 +95,7 @@ TESTS = gettext-1 gettext-2 gettext-3 gettext-4 gettext-5 gettext-6 gettext-7 \
 	xgettext-perl-1 xgettext-perl-2 xgettext-perl-3 xgettext-perl-4 \
 	xgettext-perl-5 xgettext-perl-6 xgettext-perl-7 xgettext-perl-8 \
 	xgettext-php-1 xgettext-php-2 xgettext-php-3 xgettext-php-4 \
-	xgettext-po-1 xgettext-po-2 \
+	xgettext-po-1 \
 	xgettext-properties-1 \
 	xgettext-python-1 xgettext-python-2 xgettext-python-3 \
 	xgettext-python-4 \

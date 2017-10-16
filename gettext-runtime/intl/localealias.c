@@ -1,5 +1,5 @@
 /* Handle aliases for locale names.
-   Copyright (C) 1995-2017 Free Software Foundation, Inc.
+   Copyright (C) 1995-2016 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU Lesser General Public License as published by
@@ -64,7 +64,6 @@ char *alloca ();
 # include "relocatable.h"
 #else
 # define relocate(pathname) (pathname)
-# define relocate2(pathname,allocatedp) (*(allocatedp) = NULL, (pathname))
 #endif
 
 /* @@ end of prolog @@ */
@@ -220,7 +219,6 @@ read_alias_file (const char *fname, int fname_len)
 {
   FILE *fp;
   char *full_fname;
-  char *malloc_full_fname;
   size_t added;
   static const char aliasfile[] = "/locale.alias";
 
@@ -236,11 +234,10 @@ read_alias_file (const char *fname, int fname_len)
 #ifdef _LIBC
   /* Note the file is opened with cancellation in the I/O functions
      disabled.  */
-  fp = fopen (relocate2 (full_fname, &malloc_full_fname), "rce");
+  fp = fopen (relocate (full_fname), "rce");
 #else
-  fp = fopen (relocate2 (full_fname, &malloc_full_fname), "r");
+  fp = fopen (relocate (full_fname), "r");
 #endif
-  free (malloc_full_fname);
   freea (full_fname);
   if (fp == NULL)
     return 0;
